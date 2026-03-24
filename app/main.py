@@ -13,8 +13,11 @@ logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 
-VERSION = os.environ.get("APP_VERSION", "1.0.0")
-
+try:
+    from version import __version__
+    VERSION = __version__
+except ImportError:
+    VERSION = os.environ.get("APP_VERSION", "unknown")
 @app.route("/")
 def hello():
     logger.info("Route / appelée")

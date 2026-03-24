@@ -6,6 +6,10 @@ terraform {
       version = "~> 5.0"
     }
   }
+  backend "gcs" {
+    bucket = "devops-tp-lekma-tf-state"
+    prefix = "helloworld/state"
+  }
 }
 
 provider "google" {
