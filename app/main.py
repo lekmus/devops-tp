@@ -57,7 +57,13 @@ def slow():
     logger.info("Route /slow appelée -- délai=%.2fs", delay)
     time.sleep(delay)
     return jsonify({"message": "Réponse lente", "delay_seconds": round(delay, 2)})
-
+@app.route("/version")
+def version():
+    """Retourne la version de l'application."""
+    return jsonify({
+        "version": VERSION,
+        "environment": os.environ.get("ENV", "production"),
+    })
 @app.errorhandler(500)
 def handle_500(e):
     logger.error("Erreur 500 : %s\n%s", str(e), traceback.format_exc())
